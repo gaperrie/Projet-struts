@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+    
+    <form-beans>
+        <form-bean name="LoginValidationForm" type="actionForm.LoginValidationForm"/>
+    
+    	<!-- ========== form-beans Contact =========================== -->	
+        <form-bean name="AddContactValidationForm" type="actionForm.AddContactValidationForm"/>
+        <form-bean name="AddContactGroupeValidationForm" type="actionForm.AddContactGroupeValidationForm"/>
+        <form-bean name="ModifyContactValidationForm" type="actionForm.ModifyContactValidationForm"/>
+        <form-bean name="ModifyAddressValidationForm" type="actionForm.ModifyAddressValidationForm"/>
+        <form-bean name="ReadContactByIdValidationForm" type="actionForm.ReadContactByIdValidationForm"/>
+        <form-bean name="DeleteWithIdValidationForm" type="actionForm.DeleteWithIdValidationForm"/>
+        <form-bean name="ContactGroupValidationForm" type="actionForm.ContactGroupValidationForm"/>
+        <form-bean name="PhoneNumberValidationForm" type="actionForm.PhoneNumberValidationForm"/>
+        <form-bean name="EntrepriseValidationForm" type="actionForm.EntrepriseValidationForm"/>
+        
+        <!-- ========== form-beans Groupe =========================== -->	
+        <form-bean name="AddGroupeValidationForm" type="actionForm.AddGroupeValidationForm"/>
+        <form-bean name="ModifyGroupeValidationForm" type="actionForm.ModifyGroupeValidationForm"/>               
+    </form-beans>
+    
+    <action-mappings>
+
+    	<action path="/Login" forward="/pages/index.jsp" />
+    	<action path="/CrudContacttest" forward="/pages/contact/crudContacttest.jsp" />
+    	<action path="/Accueil" forward="/pages/main.jsp" />      	
+    	<action path="/Login" type="servletAction.LoginAction" name="LoginValidationForm" scope="request" input="/pages/index.jsp">
+            <forward name="success" path="/CrudContact.do" />
+            <forward name="error" path="/pages/index.jsp" />
+    	</action>
+    	
+    <!-- ========== action path Contact =========================== -->	
+    
+        <action path="/AccueilContact" forward="/pages/contact/mainContact.jsp" />
+    	<action path="/ContactCreation" forward="/pages/contact/addContact.jsp" />
+    	<action path="/InputUpdateContact" forward="/pages/contact/modifyContact.jsp" />
+    	<action path="/InputPhoneNumberByContactId" forward="/pages/contact/addPhoneNumber.jsp" />
+    	<action path="/InputAddress" forward="/pages/contact/addAddress.jsp" />
+   
+		<action path="/AddContact" type="servletAction.AddContactAction" name="AddContactValidationForm" scope="request" input="/pages/contact/addContact.jsp">
+            <forward name="success" path="/ReadContact.do" />
+            <forward name="error" path="/pages/error.jsp" />
+    	</action>
+    	
+    	<action path="/AddPhoneNumber" type="servletAction.AddPhoneNumberAction" name="PhoneNumberValidationForm" scope="request" input="/pages/contact/addContact.jsp">
+            <forward name="success" path="/CrudContact.do" />
+            <forward name="error" path="/pages/error.jsp" />
+    	</action>
+    	
+    	<action path="/AddAddress" type="servletAction.AddAddressAction" name="ModifyAddressValidationForm" scope="request" input="/pages/contact/addContact.jsp">
+            <forward name="success" path="/CrudContact.do" />
+            <forward name="error" path="/pages/error.jsp" />
+    	</action>
+    	
+    	<action path="/ContactGroupAdd" type="servletAction.ContactGroupAddAction" name="ContactGroupValidationForm" scope="request" input="/pages/contact/addContact.jsp">
+            <forward name="success" path="/CrudContact.do" />
+            <forward name="error" path="/pages/error.jsp" />
+    	</action>
+    	
+    	<action path="/AddContactGroupe" type="servletAction.AddContactGroupeAction" name="AddContactGroupeValidationForm" scope="request" input="/pages/contact/addContactGroupe.jsp">
+            <forward name="success" path="/CrudContact.do" />
+            <forward name="error" path="/pages/error.jsp" />
+    	</action>
+    	
+    	<action path="/InputContactGroupe" type="servletAction.ReadGroupeAction" validate="false">
+    		<forward name="success" path="/pages/contact/addContactGroupe.jsp" />
+    	</action>  
+    	
+    	<action path="/AddGroupeByContactId" type="servletAction.ReadGroupeByContactIdAction" validate="false">
+    		<forward name="success" path="/pages/contact/addGroupeByContactId.jsp" />
+    	</action>    	
+    
+    	<action path="/ReadContact" type="servletAction.ReadContactAction" validate="false">
+    		<forward name="success" path="/pages/contact/readContact.jsp" />
+    	</action>
+    	
+    	<action path="/ReadContactById" type="servletAction.ReadContactByIdAction" name="ReadContactByIdValidationForm" validate="false">
+    		<forward name="success" path="/pages/contact/readContactById.jsp" />
+    	</action>
+
+    	<action path="/UpdateContactById" type="servletAction.ReadContactByIdAction" name="ReadContactByIdValidationForm">
+    		<forward name="success" path="/pages/contact/updateContactById.jsp" />
+    	</action>    	
+    	
+    	<action path="/InputUpdateContact" forward="/pages/contact/modifyContact.jsp" />
+    	
+    	<action path="/UpdateContactDisplay" type="servletAction.ReadContactAction" validate="false">
+    		<forward name="success" path="/pages/contact/updateContact.jsp" />
+    	</action>
+
+    	<action path="/ModifyContact" type="servletAction.ModifyContactAction" name="ModifyContactValidationForm" scope="request" >
+            <forward name="success" path="/CrudContact.do" />
+            <forward name="error" path="/pages/error.jsp" />
+    	</action> 
+    	
+    	<action path="/ModifyAddress" type="servletAction.ModifyAddressAction" name="ModifyAddressValidationForm">
+            <forward name="success" path="/CrudContact.do" />
+            <forward name="error" path="/pages/error.jsp" />
+    	</action>
+    	    	
+    	<action path="/DeleteContactDisplay" type="servletAction.ReadContactAction" validate="false">
+    		<forward name="success" path="/pages/contact/deleteContact.jsp" />
+    	</action>
+    	
+    	<action path="/DeleteContact" type="servletAction.DeleteContactAction" name="DeleteWithIdValidationForm" scope="request" input="/pages/contact/deleteContact.jsp">
+            <forward name="success" path="/CrudContact.do" />
+            <forward name="error" path="/pages/error.jsp" />
+    	</action>
+    	
+    	<action path="/DeleteContactGroup" type="servletAction.DeleteContactGroupAction" scope="request" input="/pages/contact/updateContactById.jsp">
+            <forward name="success" path="/CrudContact.do" />
+            <forward name="error" path="/pages/error.jsp" />
+    	</action>
+    	
+    	<action path="/InputUpdatePhoneNumber" forward="/pages/contact/updatePhoneNumber.jsp" />
+
+    	<action path="/ModifyPhoneNumber" type="servletAction.ModifyPhoneNumberAction" name="PhoneNumberValidationForm" scope="request" input="/pages/contact/updatePhoneNumber.jsp">
+            <forward name="success" path="/CrudContact.do" />
+            <forward name="error" path="/pages/error.jsp" />
+    	</action> 
+    	
+    	<action path="/ModifyEntreprise" type="servletAction.ModifyEntrepriseAction" name="EntrepriseValidationForm" scope="request" input="/pages/contact/updatePhoneNumber.jsp">
+            <forward name="success" path="/CrudEntreprise.do" />
+            <forward name="error" path="/pages/error.jsp" />
+    	</action>
+    	    	
+    	<action path="/DeletePhoneNumber" type="servletAction.DeletePhoneNumberAction" scope="request" input="/pages/contact/updateContactById.jsp">
+            <forward name="success" path="/CrudContact.do" />
+            <forward name="error" path="/pages/error.jsp" />
+    	</action>
+    	
+    	<action path="/CrudContact" type="servletAction.ReadContactAction" validate="false">
+    		<forward name="success" path="/pages/contact/crudContact.jsp" />
+    	</action>
+    	
+    	<action path="/CrudEntreprise" type="servletAction.ReadEntrepriseAction" validate="false">
+    		<forward name="success" path="/pages/contact/crudContact.jsp" />
+    	</action>
+    	
+    	<action path="/CrudGroupe" type="servletAction.ReadGroupeAction" validate="false">
+    		<forward name="success" path="/pages/groupe/crudGroupe.jsp" />
+    	</action>
+    	<!-- ========== action path Groupe =========================== --> 
+    	  
+    	<action path="/GroupeCreation" forward="/pages/groupe/addGroupe.jsp" />
+    	<action path="/AccueilGroupe" forward="/pages/groupe/mainGroupe.jsp" />
+
+    	   	   	
+    	<action path="/AddGroupe" type="servletAction.AddGroupeAction" name="AddGroupeValidationForm" scope="request" input="/pages/groupe/addGroupe.jsp">
+            <forward name="success" path="/pages/groupe/readGroupe.jsp" />
+            <forward name="error" path="/pages/error.jsp" />
+    	</action>
+    	
+    	<action path="/ReadGroupe" type="servletAction.ReadGroupeAction" validate="false">
+    		<forward name="success" path="/pages/groupe/readGroupe.jsp" />
+    	</action>
+    	
+    	<action path="/InputUpdateGroupe" type="servletAction.ReadGroupeByIdAction" validate="false">
+    		<forward name="success" path="/pages/groupe/modifyGroupe.jsp" />
+    	</action>
+    	
+    	<action path="/ReadGroupeById" type="servletAction.ReadGroupeByIdAction" validate="false">
+    		<forward name="success" path="/pages/groupe/readGroupeById.jsp" />
+    	</action>
+    	
+    	<action path="/DeleteGroupeDisplay" type="servletAction.ReadGroupeAction" validate="false">
+    		<forward name="success" path="/pages/groupe/deleteGroupe.jsp" />
+    	</action>
+    	
+    	<action path="/DeleteGroupe" type="servletAction.DeleteGroupeAction" name="DeleteWithIdValidationForm" scope="request" input="/pages/groupe/deleteGroupe.jsp">
+            <forward name="success" path="/CrudGroupe.do" />
+            <forward name="error" path="/pages/error.jsp" />
+    	</action>
+    	
+    	<action path="/UpdateGroupeDisplay" type="servletAction.ReadGroupeAction" validate="false">
+    		<forward name="success" path="/pages/groupe/updateGroupe.jsp" />
+    	</action>
+
+    	<action path="/ModifyGroupe" type="servletAction.ModifyGroupeAction" name="ModifyGroupeValidationForm" scope="request" input="/pages/groupe/modifyGroupe.jsp">
+            <forward name="success" path="/CrudGroupe.do" />
+            <forward name="error" path="/pages/error.jsp" />
+    	</action> 
+    	
+    	    	<action path="/DeleteGroupContact" type="servletAction.DeleteContactGroupAction" scope="request" input="/pages/contact/updateContactById.jsp">
+            <forward name="success" path="/CrudGroupe.do" />
+            <forward name="error" path="/pages/error.jsp" />
+    	</action>
+    </action-mappings>
+
+<!-- ========== Ressources de definitions de messages =========================== -->
+    <message-resources parameter="resources/Resources" />
+
+</struts-config>

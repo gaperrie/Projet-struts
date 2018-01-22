@@ -1,0 +1,4 @@
+    	<action path="/AddContactGroupe" type="servletAction.AddContactGroupeAction" name="AddContactGroupeValidationForm" scope="request" input="/pages/contact/addContactGroupe.jsp">
+            <forward name="success" path="/CrudContact.do" />
+            <forward name="error" path="/pages/error.jsp" />
+    	</action>
